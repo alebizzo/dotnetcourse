@@ -6,7 +6,7 @@ namespace dotnetcourse.Controllers
     {
         public IActionResult Index()
         {
-            return Content("Sono la pagina home!");
+            return View();
         }
     }
 }
