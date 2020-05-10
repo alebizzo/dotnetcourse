@@ -15,6 +15,7 @@ namespace dotnetcourse
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,10 +31,11 @@ namespace dotnetcourse
             // middleware per i file statici
             app.UseStaticFiles();
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
+            // middleware di routing
+            app.UseMvc(routeBuilder => {
+                routeBuilder.MapRoute("dfault", "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }
