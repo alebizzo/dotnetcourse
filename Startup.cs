@@ -29,7 +29,7 @@ namespace dotnetcourse
 
             // middleware di routing
             app.UseMvc(routeBuilder => {
-                routeBuilder.MapRoute("dfault", "{controller=Home}/{action=Index}/{id?}");
+                routeBuilder.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
 
         }
