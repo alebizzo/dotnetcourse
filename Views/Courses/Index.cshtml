@@ -1,27 +1,43 @@
-﻿<h1>Catalogo dei corsi</h1>
-@for (int i = 1; i < 10; i++)
+﻿@model List<CourseViewModel>
+
+<h1>Catalogo dei corsi</h1>
+
+@foreach (CourseViewModel course in Model)
 {
 <div class="row">
     <div class="col-md-1">
-        <img src="http://placeimg.com/50/50/any" alt="" title="">
+        <img src="@course.Course_Image" alt="@course.Course_Title" title="@course.Course_Title">
     </div>
     <div class="col-md-5">
-        <h2>Titolo del corso</h2>
-        <author>di nome autore</author>
+        <h2>@course.Course_Title</h2>
+        <author>di @course.Course_Author</author>
+    </div>
+    <div class="col-md-2" title="@String.Format("{0:0.00}", course.Course_Rating)">
+        @for (int i = 1; i < 5; i++)
+        {
+            if (course.Course_Rating >= i)
+            {
+                <i class="fas fa-star"></i>
+            }
+            else if (course.Course_Rating > i -1)
+            {
+                <i class="fas fa-star-half-alt"></i>
+            }
+            else
+            {
+                <i class="far fa-star"></i>
+            }
+        }
     </div>
     <div class="col-md-2">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="far fa-star"></i>
+        @course.Course_Price
+        @if (!course.Course_Price_List.Equals(course.Course_Price))
+        {
+            <br/><s>@course.Course_Price_List</s>        
+        }
     </div>
     <div class="col-md-2">
-        EUR 10,99<br/>
-        <s>EUR 12,99</s>
-    </div>
-    <div class="col-md-2">
-        <a asp-action="detail" asp-controller="courses" class="btn btn-outline-primary">Dettagli</a>
+        <a asp-action="detail" asp-controller="courses" asp-route-id="@course.Course_Id" class="btn btn-outline-primary">Dettagli</a>
     </div>
 </div>
 }
